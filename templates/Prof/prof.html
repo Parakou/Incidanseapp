@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+</head>
+<body>
+<style>
+
+ td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }
+</style>
+
+
+<table>
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom </th>
+        <th>Prenom</th>
+        <th>numcontact</th>
+         <th>mail</th>
+        <th>datenaissance</th>
+
+    </tr>
+    </thead>
+    <tbody>
+     {% for row in profs %}
+            <tr>
+                <td>{{row.Prof_id}}</td>
+                <td>{{row.Prof_nom}}</td>
+                <td>{{row.Prof_prenom}}</td>
+                <td>{{row.Prof_numcontact}}</td>
+                <td>{{row.Prof_mail}}</td>
+                <td>{{row.Prof_datenaissance}}</td>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+</head>
+<body>
+<style>
+
+ td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }
+</style>
+
+
+<table>
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom cours</th>
+        <th>Cours temps</th>
+        <th>Cours jour</th>
+
+    </tr>
+    </thead>
+    <tbody>
+     {% for row in cours %}
+            <tr>
+                <td>{{row.Coursid}}</td>
+                <td>{{row.Cours_nom}}</td>
+                <td>{{row.Cours_temps}}</td>
+                <td>{{row.Cours_jours}}</td>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

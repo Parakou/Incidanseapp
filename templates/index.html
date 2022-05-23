@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+
+</head>
+<body>
+<h2>Vehicle info dashboard</h2>
+<p align="center"><form action="{{ url_for('studentview_blueprint.studentview') }}" method="post">
+    <input type="hidden"  />
+    <button>Student</button></form>
+
+<p align="center"><form action="{{ url_for('studentview_blueprint.studentadd') }}" method="post">
+    <input type="hidden"  />
+    <button>ajouter Student</button></form>
+
+<p align="center"><form action="{{ url_for('coursview_blueprint.courview') }}" method="post">
+    <input type="hidden"  />
+    <button>cours</button></form>
+
+<p align="center"><form action="{{ url_for('profview_blueprint.profview') }}" method="post">
+    <input type="hidden"  />
+    <button>Prof</button></form>
+
+</body>
+</html>

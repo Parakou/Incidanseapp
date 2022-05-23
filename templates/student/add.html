@@ -1,0 +1,28 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<form action="{{ url_for('studentview_blueprint.addstudent') }}" method="post" autocomplete="off">
+    <div>
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="firstname">
+    </div>
+    <div>
+        <label for="mail">e-mail :</label>
+        <input type="text" id="mail" name="name">
+    </div>
+
+<label for="ville">What's your favorite state?</label>
+<input type="text" id="ville" name="ville" list="villes">
+    <datalist id="villes">
+    <select>
+    {% for row in listeville %}
+    <option value={{row.Ville_nom}} >{{row.Ville_nom}}</option>
+     {% endfor %}
+    </select>
+    </datalist>
+
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
