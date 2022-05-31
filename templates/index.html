@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title></title>
- <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-
+    <title>Index</title>
 </head>
+<style>
+    hr {
+    border: none;
+    border-top: 1rem solid;
+    color: #333;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+
+}
+
+</style>
+
 <body>
 
-<h2>Vehicle info Test</h2>
+<img src="/static/Costumeimage/Incidanse.ico" width="600" height="200">
+<img src="https://i.imgur.com/ruU04I6.jpg">
+
+<ul>
+    {% for item in nav.top %}
+    <li class="{{ 'active' if item.is_active else '' }}">
+        <a href="{{ item.url }}">{{ item.label }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<h2>Gestion </h2>
 
 <p align="center"><form action="{{ url_for('studentview_blueprint.studentview') }}" method="post">
     <input type="hidden"  />
@@ -16,7 +37,8 @@
 <p align="center"><form action="{{ url_for('studentview_blueprint.studentadd') }}" method="post">
     <input type="hidden"  />
     <button>ajouter Student</button></form>
-------------------------------------------------------------
+<hr>
+
 
 <p align="center"><form action="{{ url_for('coursview_blueprint.courview') }}" method="post">
     <input type="hidden"  />
@@ -27,7 +49,8 @@
     <button>Ajouter cours</button></form>
 
 
-------------------------------------------------------------
+<hr>
+
 
 <p align="center"><form action="{{ url_for('profview_blueprint.profview') }}" method="post">
     <input type="hidden"  />
@@ -37,6 +60,27 @@
     <input type="hidden"  />
     <button>Ajouter un Professeur</button></form>
 
+<hr>
+<p align="center"><form action="{{ url_for('costume_blueprint.costumeview') }}" method="post">
+    <input type="hidden"  />
+    <button>Costume</button></form>
+
+<p align="center"><form action="{{ url_for('costume_blueprint.costumeadd') }}" method="post">
+    <input type="hidden"  />
+    <button>Ajouter un costume</button></form>
+
+
+<p align="center"><form action="{{ url_for('costume_blueprint.calendrier') }}" method="post">
+    <input type="hidden"  />
+    <button>Calendrier</button></form>
+
+<p align="center"><form action="{{ url_for('costume_blueprint.product') }}" method="post">
+    <input type="hidden"  />
+    <button>Product</button></form>
+
+<hr>
+
 
 </body>
+
 </html>

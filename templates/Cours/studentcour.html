@@ -11,6 +11,16 @@
 {% block content %}
 <body>
 
+<form action="{{ url_for('coursview_blueprint.studentbycours') }}" method="post">
+  <label for="sort">Trier par année:</label>
+    <select name="sort" id="sort" />
+        {% for year in listyear %}
+    <option value="{{year.year}}">{{year.year}}</option>
+    {% endfor %}
+  </select>
+    <input value="{{cour.Cours_id}}" name="id"type="hidden">
+  <input type="submit" value="Submit">
+</form>
 
 <div class="center">
 <table class="table table-striped table-dark">
@@ -18,16 +28,37 @@
     <tr>
         <th>Cours</th>
         <th>Jour</th>
+        <th>Année</th>
     </tr>
     </thead>
     <tbody>
             <tr>
                 <td>{{cour.Cours_nom}}</td>
                 <td>{{cour.Cours_jours}}</td>
+                <td>{{currentyear}} {{sortyear}}</td>
             </tr>
     </tbody>
 </table>
 
+<div class="center">
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+        <th>Id prof</th>
+        <th>Nom prof</th>
+        <th>Prenom prof</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for prof in profs %}
+            <tr>
+                <td>{{prof.prof_id}}</td>
+                <td>{{prof.prof_nom}}</td>
+                <td>{{prof.prof_prenom }}</td>
+            </tr>
+    </tbody>
+    {% endfor %}
+</table>
 
 <table class="table table-striped table-dark">
   <thead>

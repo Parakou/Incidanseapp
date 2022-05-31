@@ -9,7 +9,8 @@ class Professeur(bd.Model):
     prof_mail = bd.Column(bd.String(45))
     prof_nom_prenom = bd.Column(bd.String(80))
     prof_datenaissance = bd.Column(bd.Date)
-    prof_test = bd.Column(bd.Enum('1', '2'))
+    prof_actif = bd.Column(bd.Enum('1', '0'), server_default=bd.text("'1'"))
+
     cours = bd.relationship("CoursProf", back_populates="professeur")
 
 

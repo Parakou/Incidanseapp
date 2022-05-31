@@ -15,6 +15,7 @@
 </style>
 
 
+
 <table>
   <thead>
     <tr>
@@ -35,13 +36,13 @@
                 <td>{{row.Cours_jours}}</td>
                 <td> <form action="{{ url_for('coursview_blueprint.studentbycours') }}" method="post">
                     <input value="{{row.Cours_id}}" name="id"type="hidden">
-                    <input type="submit" value="Voir les étudiants"></form>
+                    <input type="submit" value="Voir détails du cour"></form>
                     <form action="{{ url_for('coursview_blueprint.courupdate') }}" method="post">
                     <input value="{{row.Cours_id}}" name="id"type="hidden">
                     <input type="submit" value="Modifier cour"></form>
                     <form action="{{ url_for('coursview_blueprint.studentbycours_pdf') }}" method="post">
                     <input value="{{row.Cours_id}}" name="id"type="hidden">
-                    <input type="submit" value="Modifier cour"></form>
+                    <input type="submit" value="Génerer fiche de présence"></form>
                 </td>
         {% endfor %}
     </tr>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/product.css') }}">
+</head>
+
+
+<body>
+
+
+<div class="container-fluid px-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed">
+        <div class="container-fluid d-flex"> <a class="navbar-brand" href="#">Incidanse</a>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Couches</a> </li>
+                <li class="nav-item" role="presentation"> <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Chair</a> </li>
+                <li class="nav-item" role="presentation"> <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Dining</a> </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container-fluid mt-2 mb-5">
+    <div class="products">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="d-flex justify-content-between p-3 bg-white mb-3 align-items-center"> <span class="font-weight-bold text-uppercase">Costume</span>
+                    <div> <img src="https://img.icons8.com/windows/100/000000/list.png" width="30" /> <img src="https://img.icons8.com/ios-filled/100/000000/squared-menu.png" width="25" /> </div>
+                </div>
+                <div class="row g-3">
+                    {% for costume in costumes %}
+                        {% set image= costume.costume_images.split(';!')  %}
+                    <div class="col-md-4">
+                        <div class="card"> <img src="/{{image[0]}}" class="card-img-top">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between"> <span class="font-weight-bold">{{costume.costume_nom}}</span> <span class="font-weight-bold">Taille disponible:{{costume.costume_taille}}</span> </div>
+                                <p class="card-text mb-1 mt-1">{{costume.costume_description}}</p>
+                                <p class="card-text mb-1 mt-1">{{costume.costume_malle}}</p>
+                                <div class="d-flex align-items-center flex-row"> <img src="https://i.imgur.com/e9VnSng.png" width="20"> <span class="guarantee">2 Years Guarantee</span> </div>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <div class="text-right buttons"> <button class="btn btn-outline-dark">add to wishlist</button> <button class="btn btn-dark">Add to cart</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                     {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

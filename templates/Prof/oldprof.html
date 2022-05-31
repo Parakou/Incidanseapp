@@ -4,9 +4,6 @@
  <title></title>
 </head>
 <body>
-
-<form action="{{ url_for('profview_blueprint.oldprofesseur') }}" method="post">
-                    <input type="submit" value="Archive"></form>
 <style>
 
  td {
@@ -45,12 +42,9 @@
                     <form action="{{ url_for('profview_blueprint.coursbyprof') }}" method="post">
                     <input value="{{row.prof_id}}" name="id"type="hidden">
                     <input type="submit" value="Voir les cours"></form>
-                    <form action="{{ url_for('profview_blueprint.profupdate') }}" method="post">
+                    <form action="{{ url_for('profview_blueprint.inprofesseur') }}" method="post">
                     <input value="{{row.prof_id}}" name="id"type="hidden">
-                    <input type="submit" value="Modifier Professeur"></form>
-                     <form action="{{ url_for('profview_blueprint.outprofesseur') }}" method="post">
-                    <input value="{{row.prof_id}}" name="id"type="hidden">
-                    <input type="submit" value="Désactiver professeur"></form>
+                    <input type="submit" value="Réactiver professeur"></form>
                 </td>
         {% endfor %}
     </tr>

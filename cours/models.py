@@ -21,6 +21,8 @@ class Courseleve(bd.Model):
 
     cour=bd.relationship("Cour",back_populates="eleve")
     eleve=bd.relationship("Eleve",back_populates="cours")
+    year = bd.Column(bd.Integer,nullable=False)
+
 
 class CoursProf(bd.Model):
     CoursProf_id = bd.Column(bd.Integer, primary_key=True)
@@ -29,6 +31,7 @@ class CoursProf(bd.Model):
 
     cour = bd.relationship('Cour', back_populates='professeur')
     professeur = bd.relationship('Professeur', back_populates='cours')
+    year = bd.Column(bd.Integer, nullable=False)
 
 def ListeCour():
     return Cour.query
