@@ -24,18 +24,28 @@
         <th>numcontact</th>
          <th>mail</th>
         <th>datenaissance</th>
+        <th>Action</th>
+
 
     </tr>
     </thead>
     <tbody>
      {% for row in profs %}
             <tr>
-                <td>{{row.Prof_id}}</td>
-                <td>{{row.Prof_nom}}</td>
-                <td>{{row.Prof_prenom}}</td>
-                <td>{{row.Prof_numcontact}}</td>
-                <td>{{row.Prof_mail}}</td>
-                <td>{{row.Prof_datenaissance}}</td>
+                <td>{{row.prof_id}}</td>
+                <td>{{row.prof_nom}}</td>
+                <td>{{row.prof_prenom}}</td>
+                <td>{{row.prof_numcontact}}</td>
+                <td>{{row.prof_mail}}</td>
+                <td>{{row.prof_datenaissance}}</td>
+                <td>
+                    <form action="{{ url_for('profview_blueprint.coursbyprof') }}" method="post">
+                    <input value="{{row.prof_id}}" name="id"type="hidden">
+                    <input type="submit" value="Voir les cours"></form>
+                    <form action="{{ url_for('profview_blueprint.profupdate') }}" method="post">
+                    <input value="{{row.prof_id}}" name="id"type="hidden">
+                    <input type="submit" value="Modifier Professeur"></form>
+                </td>
         {% endfor %}
     </tr>
     </tbody>

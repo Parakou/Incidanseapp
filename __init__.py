@@ -1,17 +1,16 @@
 from flask import Flask,render_template
 from flask_bootstrap import Bootstrap
-
 from flask_mysqldb import MySQL
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.declarative import declarative_base
+
+
 from config import *
 
 
 
 db = MySQL()
 bd = SQLAlchemy()
-Base = declarative_base()
-metadata = Base.metadata
+
 
 
 
@@ -23,9 +22,16 @@ def create_app():
     db.init_app(app)
     bd.init_app(app)
     Bootstrap(app)
-    from student.student import studentview_blueprint
+
+    from cours.models import Cour,CoursProf,Courseleve
+    from student.models import Eleve
+    from Prof.models import Professeur
+    from ville.models import Province,Ville
+
     from cours.cours import coursview_blueprint
     from Prof.prof import profview_blueprint
+    from student.student import studentview_blueprint
+
 
 
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% extends "bootstrap/base.html" %}
+<html>
+<head>
+ <title></title>
+</head>
+<style>
+
+
+</style>
+{% block content %}
+<body>
+
+
+<div class="center">
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+        <th>Cours</th>
+        <th>Jour</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>{{cour.Cours_nom}}</td>
+                <td>{{cour.Cours_jours}}</td>
+            </tr>
+    </tbody>
+</table>
+
+
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>Prenom</th>
+        <th>Nom</th>
+        <th>Date de naissance</th>
+        <th>Age</th>
+        <th>Adresse</th>
+        <th>Numéro de téléphone </th>
+        <th>Numéro de téléphone 2</th>
+        <th>Adresse mail</th>
+        <th>Adresse mail 2</th>
+        <th>Nombre d'heures de cours</th>
+        <th>Frere ou soeur</th>
+        <th>Remarque médical</th>
+        <th>Ville</th>
+        <th>Code postal</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+             {% for eleve in eleves %}
+                <td>{{eleve.eleve_id}}</td>
+                <td>{{eleve.eleve_prenom}}</td>
+                <td>{{eleve.eleve_nom}}</td>
+                <td>{{eleve.eleve_datenaissance.strftime('%d-%m-%y')}}</td>
+                <td>{{eleve.eleve_age}}</td>
+                <td>{{eleve.eleve_adresse}}</td>
+                <td>{{eleve.eleve_GSM}}</td>
+                <td>{{eleve.eleve_fixe}}</td>
+                <td>{{eleve.eleve_mail}}</td>
+                <td>{{eleve.eleve_mail2}}</td>
+                <td>{{eleve.eleve_heure}}</td>
+                {% if eleve.eleve_freresoeur == '1' %}
+                    <td>Oui</td>
+                {% else %}
+                    <td>Non</td>
+                {% endif %}
+                <td>{{eleve.eleve_medic}}</td>
+                <td>{{eleve.Ville.Ville_nom}}</td>
+                <td>{{eleve.Ville.Ville_CP}}</td>
+                 </tr>
+{% endfor %}
+</table>
+</div>
+
+
+
+
+</body>
+{% endblock %}
+</html>

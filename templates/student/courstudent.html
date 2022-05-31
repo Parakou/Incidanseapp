@@ -7,25 +7,6 @@
 {% block content %}
 <body>
 
-    <form action="{{ url_for('studentview_blueprint.studentview') }}" method="post">
-  <label for="sort">Trier par:</label>
-    <select name="sort" id="sort" />
-    <option value="prenom">prenom</option>
-    <option value="nom">nom</option>
-    <option value="age">age</option>
-    <option value="heuredecours">Heure de cours</option>
-  </select>
-  <input type="submit" value="Submit">
-</form>
-
-
-    <form action="{{ url_for('studentview_blueprint.search') }}" method="post">
-  <label for="search">search:</label>
-  <input type="text"  name="search">
-  <input type="submit" value="Submit">
-</form>
-
-
 <table class="table table-striped table-dark">
   <thead>
     <tr>
@@ -44,11 +25,9 @@
         <th>Remarque médical</th>
         <th>Ville</th>
         <th>Code postal</th>
-        <th>Action</th>
     </tr>
     </thead>
     <tbody>
-     {% for row in eleve %}
             <tr>
                 <td>{{row.eleve_id}}</td>
                 <td>{{row.eleve_prenom}}</td>
@@ -69,21 +48,30 @@
                 <td>{{row.eleve_medic}}</td>
                 <td>{{row.Ville.ville_nom}}</td>
                 <td>{{row.Ville.ville_CP}}</td>
-                <td> <form action="{{ url_for('studentview_blueprint.coursbystudent') }}" method="post">
-                    <input value="{{row.eleve_id}}" name="id"type="hidden">
-                    <input type="submit" value="Voir les cours"></form>
-                    <form action="{{ url_for('studentview_blueprint.studentupdate') }}" method="post">
-                    <input value="{{row.eleve_id}}" name="id"type="hidden">
-                    <input type="submit" value="Modifier l'eleve"></form>
-                    <form action="{{ url_for('studentview_blueprint.outstudent') }}" method="post">
-                    <input value="{{row.eleve_id}}" name="id"type="hidden">
-                    <input type="submit" value="Désactiver student"></form>
-                </td>
-            </tr>
-        {% endfor %}
+</table>
 
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+        <th>Cours</th>
+        <th>Jour</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            {% for cours in row.cours %}
+                <td>{{cours.cour.Cours_nom}}</td>
+                <td>{{cours.cour.Cours_jours}}</td>
+            </tr>
+            {% endfor %}
     </tbody>
 </table>
-{% endblock %}
+
+
+
+
+
+
 </body>
+{% endblock %}
 </html>

@@ -1,0 +1,13 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<form action="{{ url_for('coursview_blueprint.couradd') }}" method="post" autocomplete="off">
+ {{ form.csrf_token }}
+     {% for row in listcol %}
+{{ form[row].label }} {{ form[row] }}
+        {% endfor %}
+
+  <input type="submit" name="submit">
+</form>
+
+{% endblock %}

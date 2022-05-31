@@ -22,16 +22,27 @@
         <th>Nom cours</th>
         <th>Cours temps</th>
         <th>Cours jour</th>
+        <th>Action</th>
 
     </tr>
     </thead>
     <tbody>
      {% for row in cours %}
             <tr>
-                <td>{{row.Coursid}}</td>
+                <td>{{row.Cours_id}}</td>
                 <td>{{row.Cours_nom}}</td>
                 <td>{{row.Cours_temps}}</td>
                 <td>{{row.Cours_jours}}</td>
+                <td> <form action="{{ url_for('coursview_blueprint.studentbycours') }}" method="post">
+                    <input value="{{row.Cours_id}}" name="id"type="hidden">
+                    <input type="submit" value="Voir les étudiants"></form>
+                    <form action="{{ url_for('coursview_blueprint.courupdate') }}" method="post">
+                    <input value="{{row.Cours_id}}" name="id"type="hidden">
+                    <input type="submit" value="Modifier cour"></form>
+                    <form action="{{ url_for('coursview_blueprint.studentbycours_pdf') }}" method="post">
+                    <input value="{{row.Cours_id}}" name="id"type="hidden">
+                    <input type="submit" value="Modifier cour"></form>
+                </td>
         {% endfor %}
     </tr>
     </tbody>

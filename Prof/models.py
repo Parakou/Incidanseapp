@@ -1,19 +1,19 @@
-from sqlalchemy import Column, Date, Enum, ForeignKey, Integer, String, text
-from sqlalchemy.orm import relationship
 from __init__ import bd
-from ville.models import Ville,Province
+
+
+class Professeur(bd.Model):
+    prof_id = bd.Column(bd.Integer, primary_key=True)
+    prof_nom = bd.Column(bd.String(45), nullable=False)
+    prof_prenom = bd.Column(bd.String(45), nullable=False)
+    prof_numcontact = bd.Column(bd.String(45))
+    prof_mail = bd.Column(bd.String(45))
+    prof_nom_prenom = bd.Column(bd.String(80))
+    prof_datenaissance = bd.Column(bd.Date)
+    prof_test = bd.Column(bd.Enum('1', '2'))
+    cours = bd.relationship("CoursProf", back_populates="professeur")
 
 
 
 
-class Prof(bd.Model):
-    __tablename__ = 'Prof'
 
-    Prof_id = Column(Integer, primary_key=True)
-    Prof_nom = Column(String(45), nullable=False)
-    Prof_prenom = Column(String(45), nullable=False)
-    Prof_numcontact = Column(String(45))
-    Prof_mail = Column(String(45))
-    Prof_nom_prenom = Column(String(80))
-    Prof_datenaissance = Column(Date)
-    Prof_test = Column(Enum('1', '2'))
+
