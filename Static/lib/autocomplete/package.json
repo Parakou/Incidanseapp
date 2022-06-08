@@ -1,0 +1,52 @@
+{
+  "name": "jquery-autocompleter",
+  "version": "0.5.0",
+  "license": "MIT",
+  "main": "./dist/jquery.autocompleter.js",
+  "unpkg": "./dist/jquery.autocompleter.min.js",
+  "description": "Easy customisable and with localStorage cache support.",
+  "keywords": [
+    "jquery-plugin",
+    "autocomplete",
+    "cache",
+    "ajax",
+    "input",
+    "jquery"
+  ],
+  "author": "Artem Fitiskin <artemfitiskin@gmail.com> (https://github.com/fitiskin)",
+  "repository": "fitiskin/jquery-autocompleter",
+  "homepage": "https://github.com/fitiskin/jquery-autocompleter#readme",
+  "demo": "https://fitiskin.github.io/jquery-autocompleter/",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run clean && npm run build",
+    "format": "prettier --write \"src/**/*.js\" \"**/*.md\" \"**/*.css\"",
+    "lint": "eslint . --ext .js --cache",
+    "lint:fix": "npm run lint --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "hooks:pre-commit": "lint-staged"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/preset-env": "^7.7.7",
+    "eslint": "^8.12.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.7",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.32.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.3"
+  }
+}
