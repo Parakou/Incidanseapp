@@ -33,10 +33,10 @@
     <tbody>
      {% for row in fichecours %}
             <tr>
-                <td>{{row}}</td>
+                <td>{{fichecours[row]["nom"]}}</td>
                 <td>
-                {% for date in fichecours[row] %}
-                    <a href="{{ url_for('coursview_blueprint.getfichecour', id=Cours_id, date=date )}}" id="fiche" class="button">{{date }}</a>
+                {% for date in fichecours[row]["date"] %}
+                    <a href="{{ url_for('coursview_blueprint.getfichecour', nom=fichecours[row]["nom"],date=date.replace('/','_'))}}" id="fiche" class="button">{{ date }}</a>
                     {% endfor %}
                     </td>
     </tr>

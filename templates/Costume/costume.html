@@ -10,14 +10,12 @@
 
 <body>
 
-
 <div class="container-fluid px-0">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed">
-        <div class="container-fluid d-flex"> <a class="navbar-brand" href="#">Incidanse</a>
+        <div class="container-fluid d-flex"> <a class="navbar-brand" href="{{ url_for('index') }}">Incidanse</a>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Couches</a> </li>
-                <li class="nav-item" role="presentation"> <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Chair</a> </li>
-                <li class="nav-item" role="presentation"> <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Dining</a> </li>
+                <li class="nav-item" role="presentation"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Panier</a> </li>
+
             </ul>
         </div>
     </nav>
@@ -33,16 +31,13 @@
                     {% for costume in costumes %}
                         {% set image= costume.costume_images.split(';!')  %}
                     <div class="col-md-4">
-                        <div class="card"> <img src="/{{image[0]}}" class="card-img-top">
+                        <div class="card">
+                            <a href="{{ url_for('costume_blueprint.product', id=costume.costume_nom)}}"><img src="/{{image[0]}}" class="card-img-top"></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between"> <span class="font-weight-bold">{{costume.costume_nom}}</span> <span class="font-weight-bold">Taille disponible:{{costume.costume_taille}}</span> </div>
                                 <p class="card-text mb-1 mt-1">{{costume.costume_description}}</p>
                                 <p class="card-text mb-1 mt-1">{{costume.costume_malle}}</p>
                                 <div class="d-flex align-items-center flex-row"> <img src="https://i.imgur.com/e9VnSng.png" width="20"> <span class="guarantee">2 Years Guarantee</span> </div>
-                            </div>
-                            <hr>
-                            <div class="card-body">
-                                <div class="text-right buttons"> <button class="btn btn-outline-dark">add to wishlist</button> <button class="btn btn-dark">Add to cart</button> </div>
                             </div>
                         </div>
                     </div>

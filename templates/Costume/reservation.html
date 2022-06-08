@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+     <link href="/static/CSS/Lineicons/LineIcons.css" rel="stylesheet">
+     <link href="/static/CSS/Lineicons/reset.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+
+
+  <title>CodePen - Shopping cart [ CodePen Challange ]</title>
+
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <header id="site-header">
+		<div class="container">
+			<h1>Contenu de la réservation <img src="/static/Costumeimage/Incidanselogo.png"></h1>
+		</div>
+      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/reservation.css') }}">
+	</header>
+
+	<div class="container">
+
+		<section id="cart">
+            {% for article in costumes %}
+			<article class="product">
+				<header>
+					<a class="remove">
+                    {% for art in session["cart"] %}
+                        {% if art.get('Nomcostume')==article.costume_nom %}
+						<img src="/{{art.get('preview')}}" alt="">
+                            <input id="itemid"  type="hidden" value="{{art.get('id')}}">
+                     {% endif %}
+                        {% endfor %}
+						<h3>Retirer du panier</h3>
+					</a>
+				</header>
+
+				<div class="content">
+
+					<h1>{{ article.costume_nom }}</h1>
+
+					{{ article.costume_description }}
+				</div>
+
+				<footer class="content">
+					<span class="qt-minus">-</span>
+                    {% for art in session["cart"] %}
+                    {% if art.get('Nomcostume')==article.costume_nom %}
+					<span class="qt">{{ art.get('qt') }}</span>
+                        {% endif %}
+                        {% endfor %}
+					<span class="qt-plus">+</span>
+					<h2 class="full-price">
+						0€
+					</h2>
+					<h2 class="price">
+						10.00€
+					</h2>
+				</footer>
+			</article>
+
+            {% endfor %}
+		</section>
+
+	</div>
+
+	<footer id="site-footer">
+		<div class="container clearfix">
+
+			<div class="right">
+				<h1 class="total">Total: <span class="pricefull">0</span>€</h1>
+				<a class="btn">Checkout</a>
+			</div>
+
+		</div>
+	</footer>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script id="rendered-js" >
+var check = false;
+
+function changeVal(el) {
+  var qt = parseFloat(el.parent().children(".qt").html());
+  var price = parseFloat(el.parent().children(".price").html());
+  var eq = Math.round(price * qt * 100) / 100;
+
+  el.parent().children(".full-price").html(eq + "€");
+
+  changeTotal();
+}
+
+function changeTotal() {
+
+  var price = 0;
+
+  $(".full-price").each(function (index) {
+    price += parseFloat($(".full-price").eq(index).html());
+  });
+
+  price = Math.round(price * 100) / 100;
+  var fullPrice = Math.round((price) * 100) / 100;
+
+  if (price == 0) {
+    fullPrice = 0;
+  }
+
+
+  $(".total span").html(fullPrice);
+}
+
+$(document).ready(function form  () {
+
+  $(".remove").click(function () {
+      if (check) {
+          var el = $(this);
+          el.parent().parent().addClass("removed");
+      } else {
+          var el = $(this);
+          el.parent().parent().addClass("removed");
+          $.ajax({
+              url: "{{url_for('costume_blueprint.removeitem')}}",
+              type: "post",
+              dataType: 'json',
+              data: {id: $(this).children("input").val()}
+          });
+      }
+    window.setTimeout(
+    function () {
+      el.parent().parent().slideUp('fast', function () {
+        el.parent().parent().remove();
+        if ($(".product").length == 0) {
+          if (check) {
+            $("#cart").html('\
+            <div class="testbox">\
+            <span class="return"><i class="lni lni-arrow-left"></i></span>\
+            <div class="banner">\
+            <h1>Formulaire de demande de réservation</h1>\
+            </div>\
+                   <form action="{{ url_for('costume_blueprint.reservation') }}" method="post" autocomplete="on">\
+                   {{ form.csrf_token }}\
+                   {% for row in listcol %}\
+                   <div class="item">\
+                   {{ form[row].label }} {{ form[row] }}\
+                   </div>\
+                   {% endfor %}\
+                   <label for="reservation_description">Description de l"évenment</label> <textarea id="reservation_description" name="reservation_description">\
+                   </textarea>\
+                  <button type="submit" name="submitbutton" value="reservsubmit" class="btn btn-primary"> \
+                    <i class="lni lni-checkmark"></i>\
+                    </button>\
+                </form>\
+                </div>\
+                  ');
+            $('#site-footer').html('');
+          }
+
+          else {
+            $("#cart").html("<h1>Panier Vide</h1>");
+          }
+        }
+
+      });
+    }, 200);
+  });
+  $(".qt-plus").click(function  () {
+    $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
+    $(this).parent().children(".full-price").addClass("added");
+    alert($(this).parent().parent().children().children().children("input").val())
+    $.ajax({
+  url : "{{url_for('costume_blueprint.additem')}}",
+          type: "post",
+          dataType: 'json',
+          data : {id:$(this).children("input").val(),}
+});
+
+    var el = $(this);
+    window.setTimeout(function () {el.parent().children(".full-price").removeClass("added");changeVal(el);}, 150);
+  });
+
+  $(".qt-minus").click(function  () {
+
+    child = $(this).parent().children(".qt");
+
+    if (parseInt(child.html()) > 1) {
+      child.html(parseInt(child.html()) - 1);
+    }
+
+    $(this).parent().children(".full-price").addClass("minused");
+
+    var el = $(this);
+    window.setTimeout(function () {el.parent().children(".full-price").removeClass("minused");changeVal(el);}, 150);
+  });
+
+  window.setTimeout(function () {$(".is-open").removeClass("is-open");}, 1200);
+
+  $(".btn").click(function () {
+    check = true;
+    $(".remove").click();
+  });
+
+});
+      </script>
+<script>
+$(document).ready(function first (){
+    var pricefull=0
+    $('.qt').each(function (){
+        var res=Math.round(parseInt($('.price').text())*parseInt($(this).text()));
+        pricefull=pricefull+res
+        $(this).parent().children(".full-price").html(res + "€");
+
+    });
+    $(".pricefull").text(pricefull);
+
+ $(".return").click(function  () {
+            first();
+          $("#cart").html(cart);
+          $('#site-footer').html(footer);
+      });
+
+});
+
+$(document).ready(function   (){
+    var cart=$("#cart").html()
+    var footer=$('#site-footer').html()
+
+ $("#cart").on("click",".return",function   () {
+          location.reload(true);
+
+      });
+  });
+
+</script>
+
+
+</body>
+
+</html>
+ 

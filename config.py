@@ -43,5 +43,6 @@ class TestingConfig:
     DROPZONE_UPLOAD_ON_CLICK = True
     DROPZONE_UPLOAD_ACTION = 'costume_blueprint.handle_upload'  # URL or endpoint
     DROPZONE_UPLOAD_BTN_ID = 'submit'
-    DROPZONE_DEFAULT_MESSAGE="Deposez les imgages ici "
+    DROPZONE_DEFAULT_MESSAGE="Déposez les images ici "
     DROPZONE_UPLOAD_MULTIPLE=True
+    SESSION_COOKIE_NAME="Incidanse"

@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Index</title>
+
+
+
 </head>
 <style>
     hr {
@@ -15,7 +18,6 @@
 }
 
 </style>
-
 <body>
 
 <img src="/static/Costumeimage/Incidanse.ico" width="600" height="200">
@@ -74,12 +76,14 @@
     <input type="hidden"  />
     <button>Calendrier</button></form>
 
-<p align="center"><form action="{{ url_for('costume_blueprint.product') }}" method="post">
+<form action="{{ url_for('costume_blueprint.calendrier') }}" method="post">
     <input type="hidden"  />
-    <button>Product</button></form>
+    <button>Calendrier</button></form>
 
+{% for i in session['cart']  %}
+    {{ i }}
+{% endfor  %}
 <hr>
-
 
 </body>
 

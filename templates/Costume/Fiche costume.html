@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang='fr' class=''>
+<head>
+     <link rel="stylesheet" href="{{ url_for('static', filename = 'lib/calendrierjs/main.css') }}">
+     <script src="{{ url_for('static', filename = 'lib/calendrierjs/main.js') }}"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+    <link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+    <link rel="canonical" href="https://codepen.io/fdanisko/pen/VadXXq?depth=everything&order=popularity&page=9&q=product&show_forks=false" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/fichecostume.css') }}">
+    <script src="/static/lib/jquery/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script>
+$(document).ready(function addtocart(){
+
+  $("#AddToCart").click(function(){
+      $.ajax({
+  url : "{{url_for('costume_blueprint.additem')}}",
+          type: "post",
+          dataType: 'json',
+          data : {qt:$("input[name='quantity']").val(),id:$("input[name='option-0']:checked").data("value"),size:$("input[name='option-0']:checked").val()},
+          success: function(data){
+            $(".shopping-cart-items").empty();
+            for (i in data) {
+            $(".shopping-cart-items").append('<li class="clearfix"> <img height="126" width="84" src="/'+data[i].preview+'" alt="Image non disponible" /> <span class="item-name">'+data[i].Nomcostume+'</span> <span class="item-quantity">Quantité:'+data[i].qt+'</span> <br> <span class="item-price">'+data[i].Taille+'</span>   <span class="item-price">'+data[i].qt+'</span> </li>');
+}}
+});
+      var qtcart=parseInt({{ productcart}});
+      $(".badge").text( qtcart+parseInt($("input[name='quantity']").val()) );
+
+});
+
+  });
+</script>
+<script>
+    $(document).ready(function addtocart(){
+        $("#cart").click(function cartfadeup () {
+        $(".shopping-cart").fadeToggle("fast");
+});
+    });
+
+</script>
+<script>
+$(document).ready(function quantity(){
+    $(".btn.plus").click(function more(){
+    var qt=parseInt($("input[name='quantity']").val());
+    $("input[name='quantity']").val(qt+1)
+});
+    $(".btn.minus").click(function more(){
+    var qt=parseInt($("input[name='quantity']").val());
+    if (qt != 1) {
+        $("input[name='quantity']").val(qt - 1)
+    }
+});
+});
+</script>
+
+
+</head>
+
+<body>
+<header role="banner" aria-label="Heading">
+  <div class="header">
+    <div class="_cont">
+      <div class="shadow">
+        <a class="logo" title="Home" href='{{ url_for('index') }}'>Incidanse</a>
+      </div>
+      <div class="mobile-menu">
+          <div class="sign2">
+             <ul class="navbar-right">
+            <li><a href="#" id="cart">
+                <i class="fa fa-shopping-cart"></i> Cart
+                <span class="badge">{{ productcart}}</span></a></li>
+            </ul>
+              <div class="container">
+        <div class="shopping-cart">
+        <div class="shopping-cart-header">
+        <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">{{ productcart}}</span>
+        <div class="shopping-cart-total">
+        <span class="lighter-text">Total:</span>
+        <span class="main-color-text">$2,229.97</span>
+        </div>
+        </div> <!--end shopping-cart-header -->
+        <ul class="shopping-cart-items">
+            {% for product in session['cart'] %}
+        <li class="clearfix">
+        <img height="126" width="84"  src="/{{ product.get('preview') }}" alt="Image non disponible" />
+        <span class="item-name">{{ product.get('Nomcostume') }}</span>
+        <span class="item-price">{{ product.get('Taille') }}</span>
+        <span class="item-quantity">Quantité: {{ product.get('qt') }}</span>
+        </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('costume_blueprint.reservation') }}" id="reservation" class="button">Demande de réservation</a>
+        </div> <!--end shopping-cart -->
+        </div> <!--end container -->
+            </div>
+            </div>
+
+            <form action="/search" method="get" id="find">
+            <div>
+            <input type="text" name="q" id="find-input" class="find-input" placeholder="Search..." value="">
+            <button type="submit" title="Search" id="find-btn">Search</button>
+          </div>
+            </form>
+      </div>
+
+      <span id="nav-icon"></span>
+    </div>
+  </div>
+  <div class="breadcrumb" role="navigation" aria-label="Breadcrumbs">
+    <div class="_cont">
+      <ol>
+          {% for costume in costumes %}
+        <li><a href='{{ url_for('index') }}'>Incidanse</a></li>
+        <li><a title="{{ costume.categorie_nom }}">{{ costume.categorie_nom }}</a></li>
+        <li>{{ costume.costume_nom }}</li>
+      </ol>
+    </div>
+  </div>
+</header>
+<section aria-label="Main content" role="main" class="product-detail">
+  <div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="url" content="http://html-koder-test.myshopify.com/products/tommy-hilfiger-t-shirt-new-york">
+    <meta itemprop="image" content="//cdn.shopify.com/s/files/1/1047/6452/products/product_grande.png?v=1446769025">
+    <div class="shadow">
+      <div class="_cont detail-top">
+        <div class="cols">
+        <div class="right-col">
+            <div id="calendar"></div>
+        </div>
+          <div class="left-col">
+            <div class="thumbs">
+                {% for image in images[1:] %}
+              <a class="thumb-image active" href="/{{ image }}" data-index="0">
+                <span><img src="/{{ image }}"></span>
+              </a>
+                    {% endfor %}
+            </div>
+            <div class="big">
+              <span id="big-image" class="img" quickbeam="image" style="background-image: url('/{{ images[0] }}')" data-src="/{{ images[0] }}"></span>
+            </div>
+          </div>
+          <div class="right-col">
+            <h1 itemprop="name">{{costume.costume_nom}}</h1>
+            <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              <div class="swatches">
+                <div class="swatch clearfix" data-option-index="0">
+                  <div class="header">Taille</div>
+                    {% for option in options %}
+                  <div data-value="124" class="swatch-element plain 124 available">
+                    <input id="{{option.costume_id}}" type="radio" name="option-0" value="{{option.costume_taille}}" data-value="{{option.costume_id}}"  checked  />
+                      <label for="{{option.costume_id}}">
+                      {{option.costume_taille}}
+                    </label>
+                  </div>
+                        {% endfor %}
+                </div>
+                <div class="swatch clearfix" data-option-index="1">
+                  <div class="header">Couleur</div>
+                  <div data-value="Blue" class="swatch-element color blue available">
+                    <div class="tooltip">Blue</div>
+                    <input quickbeam="color" id="swatch-1-blue" type="radio" name="option-1" value="Blue" checked  />
+                    <label for="swatch-1-blue" style="border-color: blue;">
+                      <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                      <span style="background-color: blue;"></span>
+                    </label>
+                  </div>
+                  <div data-value="Red" class="swatch-element color red available">
+                    <div class="tooltip">Red</div>
+                    <input quickbeam="color" id="swatch-1-red" type="radio" name="option-1" value="Red"  />
+                    <label for="swatch-1-red" style="border-color: red;">
+                      <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                      <span style="background-color: red;"></span>
+                    </label>
+                  </div>
+                  <div data-value="Yellow" class="swatch-element color yellow available">
+                    <div class="tooltip">Yellow</div>
+                    <input quickbeam="color" id="swatch-1-yellow" type="radio" name="option-1" value="Yellow"  />
+                    <label for="swatch-1-yellow" style="border-color: yellow;">
+                      <img class="crossed-out" src="//cdn.shopify.com/s/files/1/1047/6452/t/1/assets/soldout.png?10994296540668815886" />
+                      <span style="background-color: yellow;"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <!-- <form method="post" enctype="multipart/form-data" id="AddToCartForm"> -->
+                <div class="btn-and-quantity-wrap">
+                  <div class="btn-and-quantity">
+                    <div class="spinner">
+                      <span class="btn minus" data-id="2721888517"></span>
+                      <input type="text" id="updates_2721888517" name="quantity" value="1" class="quantity-selector">
+                      <input type="hidden" id="product_id" name="product_id" value="2721888517">
+                      <span class="q">Quantité.</span>
+                      <span class="btn plus" data-id="2721888517"></span>
+                    </div>
+                    <div id="AddToCart" quickbeam="add-to-cart">
+                      <span id="AddToCartText">Ajouter au panier</span>
+                    </div>
+                  </div>
+                </div>
+              <div class="tabs">
+                <div class="tab-labels">
+                  <span data-id="1" class="active">Description</span>
+                </div>
+                <div class="tab-slides">
+                  <div id="tab-slide-1" itemprop="description"  class="slide active">
+                    {{ costume.costume_description }}
+                  </div>
+                </div>
+              </div>
+              <div class="social-sharing-btn-wrapper">
+                <span id="social_sharing_btn">Share</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      {% endfor %}
+    <aside class="related">
+       <div class="_cont">
+        <h2>Article de même catégorie</h2>
+        <div class="collection-list cols-4" id="collection-list" data-products-per-page="4">
+            {% for catcostume in catcostumes %}
+                {% set image= catcostume.costume_images.split(';!')  %}
+          <a class="product-box"href="{{ url_for('costume_blueprint.product', id=catcostume.costume_nom)}}">
+            <span class="img">
+              <span style="background-image: url('/{{image[0]}}')" class="i first"></span>
+              <span class="i second" style="background-image: url('//cdn.shopify.com/s/files/1/1047/6452/products/product_030f9fc5-f253-4dca-a43a-fe2b719d0704_grande.png?v=1447530130')"></span>
+            </span>
+            <span class="text">
+              <strong>{{ catcostume.costume_nom }}</strong>
+                <div class="variants">
+                <div class="variant">
+                  <div class="var {{ catcostume.costume_taille }} available">
+                    <div class="t">{{ catcostume.costume_taille }} </div>
+                  </div>
+                </div>
+                </div>
+            </span>
+          </a>
+            {% endfor %}
+        </div>
+      </div>
+    </aside>
+  </div>
+
+</section>
+<footer role="contentinfo" aria-label="Footer">
+  <div class="_cont">
+    <div class="socials">
+      <strong>follow us:</strong>
+      <ul>
+        <li><a  title="html-koder / test on Facebook" class="fb" target="_blank">Facebook</a></li>
+        <li><a  title="html-koder / test on Instagram" class="in" target="_blank">Instagram</a></li>
+      </ul>
+    </div>
+    <div class="top">
+      <div class="right">
+        <form method="post" action="/contact" class="contact-form" accept-charset="UTF-8">
+          <input type="hidden" value="customer" name="form_type" /><input type="hidden" name="utf8" value="✓" />
+          <div>
+            <input type="hidden" id="contact_tags" name="contact[tags]" value="newsletter"/>
+            <input type="text" id="contact_email" name="contact[email]" placeholder="Submit e-mail for special offers...">
+            <button type="submit" title="Newsletter Signup">OK</button>
+          </div>
+        </form>
+      </div>
+      <div class="left">
+        <span class="phone">+420 123 456 789</span>
+        <a class="mail" href="mailto:email.from@settings.com">email.from@settings.com</a>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="left">
+        <nav role="navigation" aria-label="Service menu">
+          <ul>
+            <li><a >Lorem ipsum</a></li>
+            <li><a >About Us</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+<script>
+        let calendarE1 = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar
+        (calendarE1,{
+            locale: 'fr',
+            eventColor: '#ff0404',
+            eventSources:[
+                {
+            url: '{{ url_for('costume_blueprint.callcal') }}',
+                method: 'POST',
+                extraParams: {
+        data: $("input[name='option-0']:checked").data("value")
+      }
+    }
+]
+
+  });
+        calendar.render();
+        $("input[name='option-0']" ).change(function () {
+            var value = $("input[name='option-0']:checked").data("value")
+            alert(value)
+            var events = {
+            url: '{{ url_for('costume_blueprint.callcal') }}',
+                method: 'POST',
+                extraParams: {
+                data:value
+        }
+    }
+            var eventSources = calendar.getEventSources();
+            eventSources[0].remove();
+            calendar.addEventSource(events);
+            calendar.refetchEvents()
+        });
+    </script>
+</html>
