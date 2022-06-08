@@ -1,21 +1,18 @@
 
 
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="fr" >
 
 <head>
 
   <meta charset="UTF-8">
-  
-<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-<meta name="apple-mobile-web-app-title" content="CodePen">
      <link href="/static/CSS/Lineicons/LineIcons.css" rel="stylesheet">
      <link href="/static/CSS/Lineicons/reset.css" rel="stylesheet">
-<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/reservation.css') }}">
 
 
-  <title>CodePen - Shopping cart [ CodePen Challange ]</title>
+
+  <title>Contenu de la réservation </title>
 
 
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800'>
@@ -38,9 +35,8 @@
 <body translate="no" >
   <header id="site-header">
 		<div class="container">
-			<h1>Contenu de la réservation <img src="/static/Costumeimage/Incidanselogo.png"></h1>
+			<h1><i class="lni lni-arrow-left-circle"></i>        Contenu de la réservation <img src="/static/image%20illustration/Incidanselogo.png"></h1>
 		</div>
-      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/reservation.css') }}">
 	</header>
 
 	<div class="container">
@@ -70,7 +66,7 @@
 				<footer class="content">
 					<span class="qt-minus">-</span>
                     {% for art in session["cart"] %}
-                    {% if art.get('Nomcostume')==article.costume_nom %}
+                    {% if art.get('id')==article.costume_id %}
 					<span class="qt">{{ art.get('qt') }}</span>
                         {% endif %}
                         {% endfor %}
@@ -168,6 +164,12 @@ $(document).ready(function form  () {
                    <div class="item">\
                    {{ form[row].label }} {{ form[row] }}\
                    </div>\
+                   {% if form[row].errors  %}\
+                   {% for error in form[row].errors %}\
+                   <p class="errors">{{ error }}\
+                    </p>\
+                    {% endfor %}\
+                    {% endif %}\
                    {% endfor %}\
                    <label for="reservation_description">Description de l"évenment</label> <textarea id="reservation_description" name="reservation_description">\
                    </textarea>\
@@ -191,7 +193,7 @@ $(document).ready(function form  () {
   $(".qt-plus").click(function  () {
     $(this).parent().children(".qt").html(parseInt($(this).parent().children(".qt").html()) + 1);
     $(this).parent().children(".full-price").addClass("added");
-    alert($(this).parent().parent().children().children().children("input").val())
+
     $.ajax({
   url : "{{url_for('costume_blueprint.additem')}}",
           type: "post",

@@ -20,8 +20,7 @@
 </style>
 <body>
 
-<img src="/static/Costumeimage/Incidanse.ico" width="600" height="200">
-<img src="https://i.imgur.com/ruU04I6.jpg">
+<img src="/static/image%20illustration/Incidanse.ico" width="600" height="200">
 
 <ul>
     {% for item in nav.top %}
@@ -71,14 +70,18 @@
     <input type="hidden"  />
     <button>Ajouter un costume</button></form>
 
-
-<p align="center"><form action="{{ url_for('costume_blueprint.calendrier') }}" method="post">
+<p align="center"><form action="{{ url_for('costume_blueprint.catadd') }}" method="post">
     <input type="hidden"  />
-    <button>Calendrier</button></form>
+    <button>Ajouter une catégorie </button></form>
 
-<form action="{{ url_for('costume_blueprint.calendrier') }}" method="post">
+<hr>
+<p align="center"><form action="{{ url_for('costume_blueprint.reservationliste') }}" method="post">
     <input type="hidden"  />
-    <button>Calendrier</button></form>
+    <button>Reservation</button></form>
+
+
+
+
 
 {% for i in session['cart']  %}
     {{ i }}

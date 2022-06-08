@@ -6,3 +6,4 @@ from cours.models import Cour
 class Courform(ModelForm,FlaskForm):
     class Meta:
         model = Cour
+        exclude = ['Cours_actif']

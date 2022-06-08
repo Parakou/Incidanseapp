@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/listereservation.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap2 listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Table/Tablecss.css') }}">
+    <script src="/static/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/static/lib/jquery/Table/Tablejquery.js"></script>
+</head>
+<script>
+    $(document).ready(function() {
+  $('#myTable').DataTable({
+        language: {
+            url: '/static/lib/jquery/Table/tablefrench.json'
+        }
+    } );
+  });
+</script>
+<body>
+
+
+<form action="{{ url_for('studentview_blueprint.oldstudent') }}" method="post">
+                    <input type="submit" value="Archive"></form>
+
+<table class="table table-striped  table-hover " id="myTable">
+  <thead>
+    <tr>
+        <th>Numéro de réservation</th>
+        <th>Date de début de la reservation</th>
+        <th>Date de la fin de la reservation</th>
+        <th>Description de l'événement</th>
+        <th>Nom de la réservation</th>
+        <th>Adresse mail de contact </th>
+        <th>Numéro de téléphone de contact</th>
+        <th>Statut de la réservation</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+     {% for row in listereservation %}
+            <tr>
+                <td>{{row.reservation_id}}</td>
+                <td>{{row.reservation_début.strftime('%d-%m-%y')}}</td>
+                <td>{{row.reservation_fin.strftime('%d-%m-%y')}}</td>
+                <td>{{row.reservation_description}}</td>
+                <td>{{row.reservation_nom}}</td>
+                <td>{{row.reservation_adressemail}}</td>
+                <td>{{row.reservation_numtel}}</td>
+                <td>{{row.reservation_statut}}</td>
+                <td> <form action="{{ url_for('costume_blueprint.ficherreservation',id=row.reservation_id) }}" method="post">
+                    <input value="{{row.reservation_id}}" name="id"type="hidden">
+                    <input type="submit" value="Voir les costumes de la réservation"></form>
+
+                     <form action="{{ url_for('costume_blueprint.reservationac',id=row.reservation_id) }}" method="post">
+                    <input value="{{row.reservation_id}}" name="id"type="hidden">
+                    <input type="submit" value="Accepter la demande"></form>
+
+                     <form action="{{ url_for('costume_blueprint.reservationden',id=row.reservation_id) }}" method="post">
+                    <input value="{{row.reservation_id}}" name="id"type="hidden">
+                    <input type="submit" value="Refuser la demande"></form>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>

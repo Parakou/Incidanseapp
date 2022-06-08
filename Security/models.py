@@ -18,7 +18,7 @@ class User(bd.Model, UserMixin):
     __tablename__ = 'user'
     id = bd.Column(bd.Integer, primary_key=True)
     email = bd.Column(bd.String(255), unique=True)
-    username = bd.Column(bd.String(255), unique=True, nullable=True)
+    username = bd.Column(bd.String(255), unique=True)
     password = bd.Column(bd.String(255), nullable=False)
     last_login_at = bd.Column(bd.DateTime())
     current_login_at = bd.Column(bd.DateTime())

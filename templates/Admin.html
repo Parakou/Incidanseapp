@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>CodePen - Dashboard responsive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="/static/CSS/Lineicons/LineIcons.css" rel="stylesheet">
+     <link href="/static/CSS/Lineicons/reset.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Admin/Admin.css') }}">
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+
+
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" >
+  <body>
+  <div id="wrapper" class="">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" class="text-center hidden-xs">
+      <br>
+      <br>
+      <div class="bottom">
+        <div class="profile-popover">
+          <a href="#"><i class="fa fa-lg fa-sign-out"></i></a>
+        </div>
+        <p><a href="{{ url_for('security.logout')}}" id="user-option"><i  class=" fa fa-lg fa-user"></i></a></p>
+      </div>
+    </div>
+    <div id="m-sidebar-wrapper" class="text-center visible-xs">
+      <br>
+      <p class="text-center m-brand">
+        <a href="#">
+          <i class="fa fa-lg fa-cloud fa-white"></i>
+        </a>
+      </p>
+      <br>
+      <p>
+        <a href="#">
+          <i class="fa fa-check-square-o fa-lg"></i>
+        </a>
+      </p>
+      <div class="bottom">
+        <p>
+          <i class="fa fa-lg fa-cog"></i>&nbsp;Settings</p>
+
+        <p><i id="m-user-option"  class=" fa fa-lg fa-user pointer"></i>&nbsp;My Profile</p>
+      </div>
+
+    </div>
+
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <section id="header" class="hidden-xs">
+        <h1>DashBoard</h1>
+      </section>
+      <section id="m-header" class="visible-xs">
+        <h3><i class="fa fa-bars pointer" id="hamburger"></i> &nbsp;&nbsp;DashBoard</h3>
+      </section>
+      <div class="container-fluid">
+        <div class="row hidden-xs">
+            <div class="Student">
+          <a href="{{ url_for('studentview_blueprint.studentview')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-graduation"></i></p>
+            <p>
+              <h3>Liste des élèves</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('studentview_blueprint.studentadd')}}">
+          <div class="card">
+            <p><i class="lni lni-plus"></i><i class="lni lni-graduation"></i></p>
+            <p>
+              <h3>Ajouter un élève</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('studentview_blueprint.oldstudent')}}">
+          <div class="card">
+            <p><i class="lni lni-archive"></i><i class="lni lni-graduation"></i></p>
+            <p>
+              <h3>Ancien élève</h3>
+            </p>
+          </div>
+          </a>
+        </div>
+          <div class="Cour">
+          <a href="{{ url_for('coursview_blueprint.courview')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-library"></i></p>
+            <p>
+              <h3>Liste des cours</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('coursview_blueprint.couradd')}}">
+          <div class="card">
+            <p><i class="lni lni-plus"></i> <i class="lni lni-library"></i></p>
+            <p>
+              <h3>Ajouter un cours</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('coursview_blueprint.courold')}}">
+          <div class="card">
+            <p><i class="lni lni-archive"></i> <i class="lni lni-library"></i></p>
+            <p>
+              <h3>Ancien  cours</h3>
+            </p>
+          </div>
+          </a>
+          </div>
+          <div class="Costume">
+          <a href="{{ url_for('costume_blueprint.listecostume')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-tshirt"></i></p>
+            <p>
+              <h3>Liste des costumes</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('costume_blueprint.costumeadd')}}">
+          <div class="card">
+            <p><i class="lni lni-plus"></i> <i class="lni lni-tshirt"></i></p>
+            <p>
+              <h3>Ajouter un costume</h3>
+            </p>
+          </div>
+          </a>
+            <a href="{{ url_for('costume_blueprint.costumeold')}}">
+          <div class="card">
+            <p><i class="lni lni-archive"></i> <i class="lni lni-tshirt"></i></p>
+            <p>
+              <h3>Ancien  costume</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('costume_blueprint.catadd')}}">
+          <div class="card">
+            <p><i class="lni lni-plus"></i> <i class="lni lni-blackboard"></i></p>
+            <p>
+              <h3>Ajouter une catégorie</h3>
+            </p>
+          </div>
+          </a>
+          </div>
+          <div class="Reservation">
+          <a href="{{ url_for('costume_blueprint.reservationliste')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-support"></i></p>
+            <p>
+              <h3>Liste des réservations</h3>
+            </p>
+          </div>
+          </a>
+            <a href="{{ url_for('costume_blueprint.reservationlisteacc')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-checkbox"></i></p>
+            <p>
+              <h3>Liste des réservations acceptées</h3>
+            </p>
+          </div>
+          </a>
+          </a>
+            <a href="{{ url_for('costume_blueprint.reservationlisterefuse')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-cross-circle"></i></p>
+            <p>
+              <h3>Liste des réservations refusée</h3>
+            </p>
+          </div>
+          </a>
+          </div>
+          <div class="Professeur">
+          <a href="{{ url_for('profview_blueprint.profadd')}}">
+          <div class="card">
+            <p><i class="lni lni-plus"></i> <i class="lni lni-briefcase"></i></p>
+            <p>
+              <h3>Ajouter un professeur</h3>
+            </p>
+          </div>
+          </a>
+          <a href="{{ url_for('profview_blueprint.profview')}}">
+          <div class="card">
+            <p><i class="lni lni-list"></i> <i class="lni lni-briefcase"></i></p>
+            <p>
+              <h3>Liste des professeurs</h3>
+            </p>
+          </div>
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+      <script id="rendered-js" >
+//# sourceURL=pen.js
+    </script>
+
+
+
+</body>
+
+</html>
+

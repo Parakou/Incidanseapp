@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title></title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/listecostume.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap2 listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Table/Tablecss.css') }}">
+    <script src="/static/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/static/lib/jquery/Table/Tablejquery.js"></script>+
+</head>
+<script>
+    $(document).ready(function() {
+  $('#myTable').DataTable({
+        language: {
+            url: '/static/lib/jquery/Table/tablefrench.json'
+        }
+    } );
+  });
+</script>
+<body>
+
+<h2>Table with search</h2>
+<table class="table table-striped  table-hover " id="myTable">
+
+  <thead>
+                                   <tr>
+         <th>ID</th>
+        <th>Nom du costume</th>
+        <th>Description du costume</th>
+        <th>Malle de rangement</th>
+        <th>Quantité du costume</th>
+        <th>Taille du costume</th>
+        <th>Catégorie du costume </th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+     {% for row in costumes %}
+            <tr>
+                <td>{{row.costume_id}}</td>
+                <td>{{row.costume_nom}}</td>
+                <td>{{row.costume_description}}</td>
+                <td>{{row.costume_malle}}</td>
+                <td>{{row.costume_quantite}}</td>
+                <td>{{row.costume_taille}}</td>
+                <td>{{row.Categorie.categorie_nom}}</td>
+                <td> <form action="{{ url_for('costume_blueprint.costumedetails', id=row.costume_id )}}" method="post">
+                    <input  name="id"type="hidden">
+                    <input type="submit" value="Voir les réservations concernant ce costume"></form>
+                    <form action="{{ url_for('costume_blueprint.costumeupdte') }}" method="post">
+                    <input value="{{row.costume_id}}" name="id"type="hidden">
+                    <input type="submit" value="Modifier le costume"></form>
+                    {%  if marqueur=="actuel" %}
+                    <form action="{{ url_for('costume_blueprint.outcostume') }}" method="post">
+                    <input value="{{row.costume_id}}" name="id"type="hidden">
+                    <input type="submit" value="Désactiver le costume"></form>
+                    {% else %}
+                    <form action="{{ url_for('costume_blueprint.incostume') }}" method="post">
+                    <input value="{{row.costume_id}}" name="id"type="hidden">
+                    <input type="submit" value="Activer le costume"></form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>

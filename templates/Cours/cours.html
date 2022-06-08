@@ -2,21 +2,27 @@
 <html>
 <head>
  <title></title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Cour/listecours.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Student/Bootstrap2 listestudent.css') }}">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Table/Tablecss.css') }}">
+    <script src="/static/lib/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/static/lib/jquery/Table/Tablejquery.js"></script>
 </head>
+<script>
+    $(document).ready(function() {
+  $('#myTable').DataTable({
+        language: {
+            url: '/static/lib/jquery/Table/tablefrench.json'
+        }
+    } );
+  });
+</script>
 <body>
-<style>
 
- td {
-        width: 150px;
-        text-align: center;
-        border: 1px solid black;
-        padding: 5px;
-      }
-</style>
+<h2>Table with search</h2>
+<table class="table table-striped  table-hover " id="myTable">
 
-
-
-<table>
   <thead>
     <tr>
         <th>ID</th>
@@ -43,9 +49,12 @@
                     <form action="{{ url_for('coursview_blueprint.studentbycours_pdf') }}" method="post">
                     <input value="{{row.Cours_id}}" name="id"type="hidden">
                     <input type="submit" value="Génerer fiche de présence"></form>
+                    <form action="{{ url_for('coursview_blueprint.outcour') }}" method="post">
+                    <input value="{{row.Cours_id}}" name="id"type="hidden">
+                    <input type="submit" value="Désactiver cour"></form>
                 </td>
-        {% endfor %}
     </tr>
+    {% endfor %}
     </tbody>
 </table>
 </body>

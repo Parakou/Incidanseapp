@@ -1,15 +1,15 @@
 
-from flask import render_template
-from flask_login import login_required
-from flask_security import auth_required, Security
+from flask import render_template, flash, abort
+from flask_security import auth_required, Security, LoginForm, roles_accepted
 from flask_security.utils import hash_password
 
 from Auth.models import User, Role
-from __init__ import create_app, bd, nav, SQLAlchemyUserDatastore,session
+from Security.Auth import ExtendedLoginForm
+from __init__ import create_app, bd, nav, SQLAlchemyUserDatastore,session,login_required
 
 app=create_app()
 user_datastore = SQLAlchemyUserDatastore(bd, User, Role)
-security = Security(app, user_datastore)
+security = Security(app, user_datastore,login_form=ExtendedLoginForm)
 
 nav.Bar('top', [
     nav.Item('Home', 'index'),
@@ -17,14 +17,11 @@ nav.Bar('top', [
 
 ])
 
-
-
-
-
+if __name__ == '__main__':
+    app.run()
 
 
 @app.route('/')
-#@login_required
 def index():
     #bd.drop_all()
     #bd.create_all()
@@ -34,11 +31,18 @@ def index():
      #   print(d)
       #  if int(d.get('id'))==int(7):
        #     session['cart'].remove(d)
-
-
+    print(LoginForm)
     return render_template("index.html")
-    if __name__ == '__main__':
-        app.run()
+
+@app.route('/admin')
+@login_required
+@roles_accepted('Admin', 'Professeur')
+def admin():
+    return render_template("Admin.html")
+
+
+
+
 
 
 

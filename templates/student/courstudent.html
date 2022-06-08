@@ -5,6 +5,11 @@
  <title></title>
 </head>
 {% block content %}
+    <script>
+        $(document).ready(function() {
+  $('#myTable').DataTable();
+  });
+    </script>
 <body>
 
 <form action="{{ url_for('studentview_blueprint.coursbystudent') }}" method="post">

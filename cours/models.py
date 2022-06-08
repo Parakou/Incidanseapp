@@ -1,13 +1,19 @@
+from wtforms import ValidationError
+
 from __init__ import bd
 
+def validate_Cours_nom(form,field):
+    if not bool(Cour.query.filter_by(Cours_nom=field.data).one_or_none()) == False:
+        raise ValidationError("Le cour  existe deja")
 
 class Cour(bd.Model):
 
 
     Cours_id = bd.Column(bd.Integer, primary_key=True)
-    Cours_nom = bd.Column(bd.String(100), nullable=False)
-    Cours_temps = bd.Column(bd.String(10))
-    Cours_jours = bd.Column(bd.Enum('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'))
+    Cours_nom = bd.Column(bd.String(100), nullable=False,info={'label': 'Nom du cour','validators': [validate_Cours_nom]})
+    Cours_temps = bd.Column(bd.String(10), nullable=False,info={'label': 'Durée du cour'})
+    Cours_jours = bd.Column(bd.Enum('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'),info={'label': 'Jour du cour'})
+    Cours_actif = bd.Column(bd.Enum('1', '0'), server_default=bd.text("'1'"))
     eleve=bd.relationship("Courseleve",back_populates="cour")
     professeur=bd.relationship('CoursProf',back_populates='cour')
 

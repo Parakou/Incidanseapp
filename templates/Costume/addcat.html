@@ -1,0 +1,17 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+
+<form action="{{ url_for('costume_blueprint.catadd') }}" method="post" autocomplete="off">
+{{ form.csrf_token }}
+    {% for row in listcol %}
+        {{ form[row].label }} {{ form[row] }}
+        {% if form[row].errors  %}
+            {% for error in form[row].errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    <button type="submit" name="submitbutton" value="catsubmit" class="btn btn-primary">Salut</button>
+</form>
+
+{% endblock %}

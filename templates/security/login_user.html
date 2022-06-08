@@ -1,12 +1,47 @@
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+
+
 {% from "security/_macros.html" import render_field_with_errors, render_field %}
-{% include "security/_messages.html" %}
-<h1>{{ _('Login') }}</h1>
-<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
-  {{ login_user_form.hidden_tag() }}
-  {{ render_field_with_errors(login_user_form.email) }}
-  {{ render_field_with_errors(login_user_form.password) }}
-  {{ render_field_with_errors(login_user_form.remember) }}
-  {{ render_field(login_user_form.next) }}
-  {{ render_field(login_user_form.submit) }}
-</form>
-{% include "security/_menu.html" %}
+<body>
+  <section class="hero is-info is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+              <div class="field">
+               {{ render_field_with_errors(login_user_form.email) }}
+                  </span>
+
+              </div>
+              <div class="field">
+                {{ render_field_with_errors(login_user_form.password) }}
+              </div>
+              <div class="field">
+                <p class="control">
+                  {{ render_field(login_user_form.next) }}
+                    {{ render_field(login_user_form.submit) }}
+                </p>
+              </div>
+            </form>
+              {% include "security/_menu.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
+
+</html>

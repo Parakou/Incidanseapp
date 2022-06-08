@@ -1,28 +1,82 @@
-{% extends "bootstrap/base.html" %}
-{% block content %}
+<style>
+    *{
+    box-sizing: border-box;
+}
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 15px 30px;
+    font-size: 17px;
+    padding: 8px;
+}
+.container{
+    background-color: #f2f2f2;
+    padding:5px 20px 15px 20px;
+    border:1px,solid lightgrey ;
+    border-radius: 4px;
+}
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select,
+textarea{
+    width: 100%;
+    padding: 17px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
 
-<form action="{{ url_for('studentview_blueprint.addstudent') }}" method="post" autocomplete="off">
-    <div>
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="firstname">
-    </div>
-    <div>
-        <label for="mail">e-mail :</label>
-        <input type="text" id="mail" name="name">
-    </div>
+}
+fieldset{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 1px solid #ccc;
+}
+.main_heading{
+    text-align: center;
+}
 
-<label for="ville">What's your favorite state?</label>
-<input type="text" id="ville" name="ville" list="villes">
-    <datalist id="villes">
-    <select>
-    {% for row in listeville %}
-    <option value={{row.Ville_nom}} >{{row.Ville_nom}}</option>
-     {% endfor %}
-    </select>
-    </datalist>
+input[type="button"]{
+    background-color: #4daea1;
+    padding: 12px;
+    font-size: large;
+    border:none;
+    border-radius: 4px;
+    width: 100%;
+    font-weight: bolder;
+}
+input[type="button"]:hover{
+    background-color: #484d48;
+    color: white;
+    padding: 12px;
+    border:none;
+    border-radius: 4px;
+    cursor:pointer;
 
-  <br><br>
-  <input type="submit" value="Submit">
+}
+</style>
+<body>
+    <div class="container">
+        <form action="{{ url_for('studentview_blueprint.studentadd') }}" method="post" autocomplete="off">
+
+                <legend>
+                    <h1 class="main_heading">Ajout d'un nouvel élève</h1>
+
+                </legend>
+
+
+ {{ form.csrf_token }}
+     {% for row in listcol %}
+{{ form[row].label }} {{ form[row] }}
+         {% if form[row].errors  %}
+            {% for error in form[row].errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
+        {% endfor %}
+
+  <input type="submit" name="submit">
 </form>
-
-{% endblock %}
+</div>
+</body>

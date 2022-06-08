@@ -5,9 +5,14 @@
  {{ form.csrf_token }}
      {% for row in listcol %}
 {{ form[row].label }} {{ form[row] }}
+         {% if form[row].errors  %}
+            {% for error in form[row].errors %}
+                {{ error }}
+            {% endfor %}
+        {% endif %}
         {% endfor %}
 
-  <input type="submit" name="submit">
+  <input type="submit"  name="submitbutton">
 </form>
 
 {% endblock %}

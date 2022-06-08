@@ -5,39 +5,83 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='CSS/Costume/product.css') }}">
+    <script src="/static/lib/jquery/jquery-3.6.0.min.js"></script>
+       <link href="//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 
 
 <body>
 
-<div class="container-fluid px-0">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed">
-        <div class="container-fluid d-flex"> <a class="navbar-brand" href="{{ url_for('index') }}">Incidanse</a>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation"> <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Panier</a> </li>
-
+<header role="banner" aria-label="Heading">
+  <div class="header">
+    <div class="_cont">
+      <div class="shadow">
+        <a class="logo" title="Home" href='{{ url_for('index') }}'>Incidanse</a>
+      </div>
+      <div class="mobile-menu">
+          <div class="sign2">
+             <ul class="navbar-right">
+            <li><a href="#" id="cart">
+                <i class="fa fa-shopping-cart"></i> Cart
+                <span class="badge">{{ productcart}}</span></a></li>
             </ul>
+              <div class="container">
+        <div class="shopping-cart">
+        <div class="shopping-cart-header">
+        <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">{{ productcart}}</span>
+        <div class="shopping-cart-total">
+        <span class="lighter-text">Total:</span>
+        <span class="main-color-text">$2,229.97</span>
         </div>
-    </nav>
+        </div> <!--end shopping-cart-header -->
+        <ul class="shopping-cart-items">
+            {% for product in session['cart'] %}
+        <li class="clearfix">
+        <img height="126" width="84"  src="/{{ product.get('preview') }}" alt="Image non disponible" />
+        <span class="item-name">{{ product.get('Nomcostume') }}</span>
+        <span class="item-price">{{ product.get('Taille') }}</span>
+        <span class="item-quantity">Quantité: {{ product.get('qt') }}</span>
+        </li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('costume_blueprint.reservation') }}" id="reservation" class="button">Demande de réservation</a>
+        </div> <!--end shopping-cart -->
+        </div> <!--end container -->
+            </div>
+            </div>
+
+            <form action="/search" method="get" id="find">
+            <div>
+            <input type="text" name="q" id="find-input" class="find-input" placeholder="Search..." value="">
+            <button type="submit" title="Search" id="find-btn">Search</button>
+          </div>
+            </form>
+      </div>
+
+      <span id="nav-icon"></span>
+    </div>
+  </div>
+</header>
 </div>
 <div class="container-fluid mt-2 mb-5">
     <div class="products">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="d-flex justify-content-between p-3 bg-white mb-3 align-items-center"> <span class="font-weight-bold text-uppercase">Costume</span>
-                    <div> <img src="https://img.icons8.com/windows/100/000000/list.png" width="30" /> <img src="https://img.icons8.com/ios-filled/100/000000/squared-menu.png" width="25" /> </div>
                 </div>
                 <div class="row g-3">
                     {% for costume in costumes %}
                         {% set image= costume.costume_images.split(';!')  %}
                     <div class="col-md-4">
                         <div class="card">
-                            <a href="{{ url_for('costume_blueprint.product', id=costume.costume_nom)}}"><img src="/{{image[0]}}" class="card-img-top"></a>
+                            <a href="{{ url_for('costume_blueprint.product', id=costume.costume_nom)}}"><img src="/{{image[0]}}" width="500" height="600" class="card-img-top"></a>
                             <div class="card-body">
                                 <div class="d-flex justify-content-between"> <span class="font-weight-bold">{{costume.costume_nom}}</span> <span class="font-weight-bold">Taille disponible:{{costume.costume_taille}}</span> </div>
                                 <p class="card-text mb-1 mt-1">{{costume.costume_description}}</p>
                                 <p class="card-text mb-1 mt-1">{{costume.costume_malle}}</p>
-                                <div class="d-flex align-items-center flex-row"> <img src="https://i.imgur.com/e9VnSng.png" width="20"> <span class="guarantee">2 Years Guarantee</span> </div>
                             </div>
                         </div>
                     </div>
@@ -54,4 +98,12 @@
 </div>
 
 </body>
+<script>
+    $(document).ready(function addtocart(){
+        $("#cart").click(function cartfadeup () {
+        $(".shopping-cart").fadeToggle("fast");
+});
+    });
+
+</script>
 </html>
