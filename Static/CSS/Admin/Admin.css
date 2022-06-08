@@ -1,0 +1,187 @@
+body {
+  background-color: gainsboro;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-family: sans-serif;
+  position: relative;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.white {
+  color: white;
+}
+.Student a {
+  color: #005cbf;
+}
+.Professeur a {
+  color: green;
+}
+.Cour  a {
+  color: purple;
+}
+.Reservation  a {
+  color: #7400ff;
+}
+.Costume  a {
+  color: magenta;
+}
+#wrapper {
+  padding-left: 50px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 0px;
+  height: 100%;
+  width: 50px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#sidebar-wrapper .bottom {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  display: block;
+}
+#sidebar-wrapper .profile-popover {
+  background-color: #ddd;
+  margin: 10px 2px 15px 2px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  position: relative;
+  display: none;
+}
+#sidebar-wrapper .profile-popover::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 14px 14px 14px 14px;
+  border-color: #ddd transparent transparent transparent;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20px;
+}
+
+#m-sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: -200px;
+  height: 100%;
+  width: 200px;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  text-align: left;
+  padding-left: 20px;
+}
+#m-sidebar-wrapper .m-brand {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  backgound-color: gray;
+}
+#m-sidebar-wrapper .bottom {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  display: block;
+  left: 0;
+  padding-left: 15px;
+}
+#m-sidebar-wrapper .profile-popover {
+  background-color: #ddd;
+  margin: 10px 3px 15px -12px;
+  padding: 5px 10px 5px 5px;
+  position: relative;
+  display: none;
+}
+#m-sidebar-wrapper .profile-popover::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 14px 14px 14px 14px;
+  border-color: #ddd transparent transparent transparent;
+  position: absolute;
+  left: 20px;
+  transform: translateX(-50%);
+  bottom: -20px;
+}
+
+#m-sidebar-wrapper.active {
+  left: 0px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: relative;
+}
+#page-content-wrapper #header {
+  background-color: #49bacb;
+  padding: 30px 30px;
+  margin-bottom: 20px;
+  color: white;
+}
+#page-content-wrapper #m-header {
+  background-color: #49bacb;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  color: white;
+}
+#page-content-wrapper .card {
+  text-align: center;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+#user-option{
+  padding-left: 15px;
+}
+
+/*=================================================
+============= Customize responsive =================
+=================================================*/
+@media (min-width: 300px) {
+  #page-content-wrapper .card {
+    width: 250px;
+    margin-left: 20px;
+    float: left;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 300px) {
+  #wrapper {
+    padding-left: 0px;
+  }
+
+  body {
+    left: 0px;
+  }
+
+  body.active {
+    left: 200px;
+  }
+}

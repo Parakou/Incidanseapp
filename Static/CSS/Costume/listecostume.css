@@ -1,0 +1,27 @@
+th {
+ background-color:magenta;
+ }
+
+ .pagination .page-item.active .page-link { background-color: magenta;
+border-color:magenta;}
+
+ div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+ background-color: magenta;
+
+ }
+
+ .pagination .page-item.active .page-link:hover {
+ background-color: magenta;
+
+ }
+
+ .fa {
+ font-size:25px;
+ color:magenta;
+ }
+
+ h2 {
+
+ margin: 10px 0px 10px 0px;
+
+ }

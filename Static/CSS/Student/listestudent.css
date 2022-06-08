@@ -1,0 +1,27 @@
+th {
+ background-color:#005cbf;
+ }
+
+ .pagination .page-item.active .page-link { background-color: #005cbf;
+border-color:#005cbf;}
+
+ div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+ background-color: #005cbf;
+
+ }
+
+ .pagination .page-item.active .page-link:hover {
+ background-color: #005cbf;
+
+ }
+
+ .fa {
+ font-size:25px;
+ color:#005cbf;
+ }
+
+ h2 {
+
+ margin: 10px 0px 10px 0px;
+
+ }

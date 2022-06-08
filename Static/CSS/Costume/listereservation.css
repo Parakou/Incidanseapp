@@ -1,0 +1,27 @@
+th {
+ background-color:#7400ff;
+ }
+
+ .pagination .page-item.active .page-link { background-color: #7400ff;
+border-color:#7400ff;}
+
+ div.dataTables_wrapper div.dataTables_paginate ul.pagination .page-item.active .page-link:focus {
+ background-color: #7400ff;
+
+ }
+
+ .pagination .page-item.active .page-link:hover {
+ background-color: #7400ff;
+
+ }
+
+ .fa {
+ font-size:25px;
+ color:#7400ff;
+ }
+
+ h2 {
+
+ margin: 10px 0px 10px 0px;
+
+ }
